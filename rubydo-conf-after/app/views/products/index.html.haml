@@ -1,0 +1,27 @@
+%h1 Products
+
+%table.table.table-striped
+  %tr
+    %th Code
+    %th Name
+    %th Price
+    %th Description
+    %th Reviews
+    %th
+    %th
+    %th
+
+  - @products.each do |product|
+    %tr
+      %td= product.code
+      %td= product.name
+      %td= product.humanize_price
+      %td= truncate(product.description, :length => 130, :omission => '...')
+      %td= product.reviews.count
+      %td= link_to 'Show', product
+      %td= link_to 'Edit', edit_product_path(product)
+      %td= link_to 'Destroy', product, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Product', new_product_path, :class => 'btn btn-info'
